@@ -1,0 +1,256 @@
+{
+  "placeholderImages": [
+    {
+      "id": "about-hero",
+      "description": "Modern office building with a clean design",
+      "imageUrl": "https://images.unsplash.com/photo-1497366811353-6870744d04b2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxvZmZpY2V8ZW58MHx8fHwxNzU5MDYwMzA1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "office building"
+    },
+    {
+      "id": "services-hero",
+      "description": "Abstract creative background with geometric shapes",
+      "imageUrl": "https://images.unsplash.com/photo-1516131206008-dd041a9764fd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxhYnN0cmFjdCUyMGJhY2tncm91bmR8ZW58MHx8fHwxNzU5MDYwNDQyfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "abstract background"
+    },
+    {
+      "id": "tools-hero",
+      "description": "Close-up on various tools on a workshop table",
+      "imageUrl": "https://images.unsplash.com/photo-1455849318743-b2233052fcff?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHx0b29sc3xlbnwwfHx8fDE3NTkwNjA0NzN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "tools workshop"
+    },
+    {
+      "id": "case-studies-hero",
+      "description": "Person presenting a successful business chart",
+      "imageUrl": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxidXNpbmVzcyUyMHN1Y2Nlc3N8ZW58MHx8fHwxNzU5MDYwNTA0fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "business success"
+    },
+    {
+      "id": "careers-hero",
+      "description": "A diverse group of professionals in a modern office",
+      "imageUrl": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxkaXZlcnNlJTIwdGVhbXxlbnwwfHx8fDE3NTkwNjA1MzB8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "diverse team"
+    },
+    {
+      "id": "contact-hero",
+      "description": "A minimalist desk setup with a phone, a laptop, and a notepad, suggesting communication and business.",
+      "imageUrl": "https://images.unsplash.com/photo-1544652478-6653e09f18a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxtaW5pbWFsaXN0JTIwY29udGFjdCUyMHVzfGVufDB8fHx8MTc2NDA5ODU0M3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "minimalist contact"
+    },
+    {
+      "id": "testimonial-1",
+      "description": "Portrait of Sarah Johnson",
+      "imageUrl": "https://images.unsplash.com/photo-1540569014015-19a7be504e3a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxwZXJzb24lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NTg3ODg5NzR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "person portrait"
+    },
+    {
+      "id": "testimonial-2",
+      "description": "Portrait of Michael Chen",
+      "imageUrl": "https://images.unsplash.com/photo-1540569014015-19a7be504e3a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxwZXJzb24lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NTg3ODg5NzR8MA&ixlib-rb-4.1.0&q=80&w=1080",
+      "imageHint": "person portrait"
+    },
+    {
+      "id": "testimonial-3",
+      "description": "Portrait of Emily Rodriguez",
+      "imageUrl": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxwZXJzb24lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NTg3ODg5NzR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "person portrait"
+    },
+    {
+      "id": "tool-vscode",
+      "description": "Visual Studio Code Logo",
+      "imageUrl": "https://picsum.photos/seed/vscode/160/100",
+      "imageHint": "logo vscode"
+    },
+    {
+      "id": "tool-github",
+      "description": "GitHub Logo",
+      "imageUrl": "https://images.unsplash.com/photo-1664194493125-4d1fe78a037d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxsb2dvJTIwZ2l0aHVifGVufDB8fHx8MTc2OTE3OTQ3Mnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "logo github"
+    },
+    {
+      "id": "tool-react",
+      "description": "React.js Logo",
+      "imageUrl": "https://images.unsplash.com/photo-1603967788945-b2215de1d7b7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxsb2dvJTIwcmVhY3R8ZW58MHx8fHwxNzY5MTc5NDczfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "logo react"
+    },
+    {
+      "id": "tool-nextjs",
+      "description": "Next.js Logo",
+      "imageUrl": "https://picsum.photos/seed/nextjs/160/100",
+      "imageHint": "logo nextjs"
+    },
+    {
+      "id": "tool-nodejs",
+      "description": "Node.js Logo",
+      "imageUrl": "https://picsum.photos/seed/nodejs/160/100",
+      "imageHint": "logo nodejs"
+    },
+    {
+      "id": "tool-selenium",
+      "description": "Selenium Logo",
+      "imageUrl": "https://picsum.photos/seed/selenium/160/100",
+      "imageHint": "logo selenium"
+    },
+    {
+      "id": "tool-postman",
+      "description": "Postman Logo",
+      "imageUrl": "https://picsum.photos/seed/postman/160/100",
+      "imageHint": "logo postman"
+    },
+    {
+      "id": "tool-jira",
+      "description": "Jira Logo",
+      "imageUrl": "https://picsum.photos/seed/jira/160/100",
+      "imageHint": "logo jira"
+    },
+    {
+      "id": "tool-google-analytics",
+      "description": "Google Analytics Logo",
+      "imageUrl": "https://images.unsplash.com/photo-1633307057722-a4740ba0c5d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxsb2dvJTIwZ29vZ2xlJTIwYW5hbHl0aWNzfGVufDB8fHx8MTc2OTE3OTQ3M3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "logo google analytics"
+    },
+    {
+      "id": "tool-google-ads",
+      "description": "Google Ads Logo",
+      "imageUrl": "https://picsum.photos/seed/googleads/160/100",
+      "imageHint": "logo google ads"
+    },
+    {
+      "id": "tool-meta-ads",
+      "description": "Meta Ads Manager Logo",
+      "imageUrl": "https://picsum.photos/seed/metaads/160/100",
+      "imageHint": "logo meta ads"
+    },
+    {
+      "id": "tool-excel",
+      "description": "Microsoft Excel Logo",
+      "imageUrl": "https://images.unsplash.com/photo-1590140297846-fa479ed30a6b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxsb2dvJTIwZXhjZWx8ZW58MHx8fHwxNzY5MTc5NDczfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "logo excel"
+    },
+    {
+      "id": "tool-powerbi",
+      "description": "Power BI Logo",
+      "imageUrl": "https://picsum.photos/seed/powerbi/160/100",
+      "imageHint": "logo powerbi"
+    },
+    {
+      "id": "tool-python",
+      "description": "Python Logo",
+      "imageUrl": "https://images.unsplash.com/photo-1690683790356-c1edb75e3df7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxsb2dvJTIwcHl0aG9ufGVufDB8fHx8MTc2OTE3OTQ3Mnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "logo python"
+    },
+    {
+      "id": "tool-docker",
+      "description": "Docker Logo",
+      "imageUrl": "https://images.unsplash.com/photo-1646627927863-19874c27316b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxsb2dvJTIwZG9ja2VyfGVufDB8fHx8MTc2OTE3OTQ3Mnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "logo docker"
+    },
+    {
+      "id": "tool-aws",
+      "description": "AWS Logo",
+      "imageUrl": "https://images.unsplash.com/photo-1759242951337-d0eda5bbc3fb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxsb2dvJTIwYXdzfGVufDB8fHx8MTc2OTE3OTQ3Mnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "logo aws"
+    },
+    {
+      "id": "tool-github-actions",
+      "description": "GitHub Actions Logo",
+      "imageUrl": "https://picsum.photos/seed/githubactions/160/100",
+      "imageHint": "logo github actions"
+    },
+    {
+      "id": "tool-photoshop",
+      "description": "Adobe Photoshop Logo",
+      "imageUrl": "https://images.unsplash.com/photo-1623174793602-391707a769c5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8bG9nbyUyMHBob3Rvc2hvcHxlbnwwfHx8fDE3NjkxNzk0NzN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "logo photoshop"
+    },
+    {
+      "id": "tool-after-effects",
+      "description": "Adobe After Effects Logo",
+      "imageUrl": "https://images.unsplash.com/photo-1701696938611-cacee743b860?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxsb2dvJTIwYWZ0ZXIlMjBlZmZlY3RzfGVufDB8fHx8MTc2OTE3OTQ3M3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "logo after effects"
+    },
+    {
+      "id": "tool-figma",
+      "description": "Figma Logo",
+      "imageUrl": "https://images.unsplash.com/photo-1660806982611-0a41c0527966?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxsb2dvJTIwZmlnbWF8ZW58MHx8fHwxNzY5MTc5NDcyfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "logo figma"
+    },
+    {
+      "id": "parallax-bg",
+      "description": "Abstract technology background",
+      "imageUrl": "https://images.unsplash.com/photo-1604011237320-8e0506614fdf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxhYnN0cmFjdCUyMHRlY2hub2xvZ3l8ZW58MHx8fHwxNzU4NzgzODAwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "abstract technology"
+    },
+    {
+      "id": "who-we-are-office",
+      "description": "A team of professionals collaborating in a modern office space.",
+      "imageUrl": "https://images.unsplash.com/photo-1568992688065-536aad8a12f6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxvZmZpY2UlMjB0ZWFtfGVufDB8fHx8MTc1ODgyMTgxM3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "office team"
+    },
+    {
+      "id": "leadership-anshuman",
+      "description": "Portrait of Anshuman, CEO",
+      "imageUrl": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxwZXJzb24lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NTg3ODg5NzR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "person portrait"
+    },
+    {
+      "id": "leadership-anurag",
+      "description": "Portrait of Anurag, CFO",
+      "imageUrl": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxwZXJzb24lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NTg3ODg5NzR8MA&ixlibrb-4.1.0&q=80&w=1080",
+      "imageHint": "person portrait"
+    },
+    {
+      "id": "service-software",
+      "description": "Close-up of code on a screen",
+      "imageUrl": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "imageHint": "code screen"
+    },
+    {
+      "id": "service-elearning",
+      "description": "Group of students collaborating on a laptop.",
+      "imageUrl": "https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "imageHint": "students collaborating"
+    },
+    {
+      "id": "service-multimedia",
+      "description": "Designer's desk with a computer and phone showing UI designs.",
+      "imageUrl": "https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "imageHint": "designer desk"
+    },
+    {
+      "id": "service-marketing",
+      "description": "Laptop showing digital marketing analytics.",
+      "imageUrl": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "imageHint": "marketing analytics"
+    },
+    {
+      "id": "service-qa",
+      "description": "Person using a magnifying glass to inspect code on a screen.",
+      "imageUrl": "https://images.unsplash.com/photo-1583508915901-b5f84c1dcde1?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "imageHint": "code inspection"
+    },
+    {
+      "id": "service-data-analysis",
+      "description": "A dashboard with various charts and graphs.",
+      "imageUrl": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "imageHint": "data dashboard"
+    },
+    {
+      "id": "service-cloud-devops",
+      "description": "Illustration of cloud computing infrastructure.",
+      "imageUrl": "https://images.unsplash.com/photo-1549692520-acc6669e2f0c?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "imageHint": "cloud infrastructure"
+    },
+    {
+      "id": "privacy-hero",
+      "description": "A close-up of a padlock, symbolizing security and privacy.",
+      "imageUrl": "https://images.unsplash.com/photo-1709572374661-3998eee62fb5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8c2VjdXJpdHklMjBwYWRsb2NrfGVufDB8fHx8MTc2OTE3OTQ3M3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "security padlock"
+    },
+    {
+      "id": "terms-hero",
+      "description": "A judge's gavel and a book, symbolizing law and terms of service.",
+      "imageUrl": "https://images.unsplash.com/photo-1532153975070-2e9ab71f1b14?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxsZWdhbCUyMGRvY3VtZW50fGVufDB8fHx8MTc2OTE1MDg2NHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "legal document"
+    }
+  ]
+}
