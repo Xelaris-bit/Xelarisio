@@ -5,6 +5,13 @@ import PageHero from "@/components/sections/page-hero";
 import { FadeIn } from "@/components/fade-in";
 import { getSiteSettings, getSiteMedia } from "@/app/admin/data-actions";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Contact Xelaris - Achieve Digital Excellence",
+  description: "Ready to innovate? Contact Xelaris, your Centre of Excellence for Software, eLearning, Multimedia, and Data solutions.",
+};
+
 export const dynamic = 'force-dynamic';
 
 export default async function ContactPage() {
@@ -20,7 +27,7 @@ export default async function ContactPage() {
         <FadeIn>
           <PageHero
             title="Have A Project In Mind Or Just Want To Say Hello?"
-            subtitle="We'd Love To Hear From You. We'll Get Back To You As Soon As Possible."
+            subtitle="Ready to achieve excellence? Connect with our passionate experts today."
             imageId="contact-hero"
             customImageUrl={media['contact-hero']?.data}
           />

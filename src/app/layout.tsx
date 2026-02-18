@@ -5,22 +5,53 @@ import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/toaster";
 import BackToTopButton from "@/components/layout/back-to-top-button";
 import ScrollProgressBar from "@/components/layout/scroll-progress-bar";
+import PromoPopup from "@/components/promo-popup";
+import TechBot from "@/components/TechBot";
+import { getSiteSettings, getSiteMedia } from "@/app/admin/data-actions";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-body" });
 
 export const metadata: Metadata = {
-  title: "Xelaris - Digital Solutions for Excellence",
+  title: "Xelaris - Centre of Excellence in Technology & Innovation",
   description:
-    "Your partner in innovation. We deliver cutting-edge solutions in Software, eLearning, 3D & Multimedia, Digital Marketing, and Data Analysis.",
+    "Xelaris is a Centre of Excellence delivering end-to-end solutions in Software Development, eLearning, 3D & Multimedia, Digital Marketing, and Data Analysis. We empower businesses to achieve excellence by combining creativity, technology, and strategy.",
+  keywords: [
+    "Software Development",
+    "eLearning",
+    "3D Multimedia",
+    "Digital Marketing",
+    "Data Analysis",
+    "Technology Innovation",
+    "Xelaris",
+    "Centre of Excellence",
+    "Digital Solutions"
+  ],
+  openGraph: {
+    title: "Xelaris - Centre of Excellence in Technology & Innovation",
+    description: "Empowering businesses to achieve excellence through creativity, technology, and strategy. End-to-end solutions for a digital world.",
+    type: "website",
+    locale: "en_US",
+    siteName: "Xelaris",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Xelaris - Centre of Excellence in Technology & Innovation",
+    description: "Empowering businesses to achieve excellence through creativity, technology, and strategy.",
+  },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const settings = await getSiteSettings();
+  const media = await getSiteMedia();
+
+
+
   return (
-    <html lang="en" className="!scroll-smooth">
+    <html lang="en" className="!scroll-smooth" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -34,6 +65,11 @@ export default function RootLayout({
         {children}
         <Toaster />
         <BackToTopButton />
+        <PromoPopup settings={settings} promoImage={media['promo-banner']?.data} />
+        <TechBot
+          enabled={settings.techBotEnabled ?? true}
+          videoUrl={media['techbot-video']?.data || settings.techBotVideoUrl}
+        />
       </body>
     </html>
   );

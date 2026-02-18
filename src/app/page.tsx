@@ -3,7 +3,7 @@ import Hero from "@/components/sections/hero";
 import WhoWeAre from "@/components/sections/who-we-are";
 import OurBestServices from "@/components/sections/our-best-services";
 import WhyChooseUs from "@/components/sections/why-choose-us";
-import Tools from "@/components/sections/tools";
+import ToolsGrouped from "@/components/sections/tools-grouped";
 import ParallaxSection from "@/components/sections/parallax-section";
 import Footer from "@/components/layout/footer";
 import MissionVision from "@/components/sections/mission-vision";
@@ -56,7 +56,7 @@ export default async function Home() {
         </FadeIn>
 
         <FadeIn>
-          <Tools tools={tools} />
+          <ToolsGrouped tools={tools} />
         </FadeIn>
       </main>
       <Footer />

@@ -10,25 +10,25 @@ const benefits = [
     icon: BrainCircuit,
     title: "Innovative Solutions",
     description:
-      "Our Team Of Experts Crafts Creative And Cutting-Edge Solutions Tailored To Your Unique Needs.",
+      "Our team of experts crafts creative and cutting-edge solutions tailored to your unique needs.",
   },
   {
     icon: Milestone,
     title: "Proven Track Record",
     description:
-      "We Have A History Of Delivering Successful Projects And Driving Growth For Clients Across Industries.",
+      "We have a history of delivering successful projects and driving growth for clients across industries.",
   },
   {
     icon: ShieldCheck,
     title: "Quality & Security",
     description:
-      "Quality And Security Are At The Core Of Our Process, Ensuring Your Product Is Robust And Reliable.",
+      "Quality and security are at the core of our process, ensuring your product is robust and reliable.",
   },
   {
     icon: Users,
     title: "Collaborative Partnership",
     description:
-      "We Work As An Extension Of Your Team, Ensuring Seamless Communication And Optimal Collaboration.",
+      "We work as an extension of your team, ensuring seamless communication and optimal collaboration.",
   },
 ];
 
@@ -43,8 +43,8 @@ const WhyChooseUs = () => {
             Why Partner With Xelaris?
           </h2>
           <p className="mt-4 text-lg text-foreground/80 animate-in fade-in slide-in-from-bottom-16 duration-1000">
-            We Are More Than Just A Digital Agency. We Are Your Dedicated
-            Partners In Innovation And Success.
+            We are more than just a digital agency. We are your dedicated
+            partners in innovation and success.
           </p>
         </div>
 

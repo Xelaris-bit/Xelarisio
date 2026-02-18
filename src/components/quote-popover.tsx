@@ -22,8 +22,10 @@ type Quote = {
 
 const QuotePopover = ({ children, onClick, isMobile }: QuotePopoverProps) => {
   const [quote, setQuote] = useState<Quote | null>(null);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const randomIndex = Math.floor(Math.random() * quotes.quotes.length);
     const randomQuote = quotes.quotes[randomIndex];
 
@@ -33,6 +35,10 @@ const QuotePopover = ({ children, onClick, isMobile }: QuotePopoverProps) => {
 
     setQuote(randomQuote);
   }, []);
+
+  if (!mounted) {
+    return <>{children}</>;
+  }
 
   const content = (
     <div className="grid gap-4">

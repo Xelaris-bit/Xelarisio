@@ -3,12 +3,13 @@
 
 import connectToDatabase from '@/lib/db';
 import { SiteSettings, TeamMember, Service, Tool, Career, SiteMedia } from '@/lib/models';
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, unstable_noStore as noStore } from 'next/cache';
 
 import { logActivity } from './activity-actions';
 
 // --- Site Settings ---
 export async function getSiteSettings() {
+    noStore();
     await connectToDatabase();
     const settings = await SiteSettings.findOne().lean();
     return JSON.parse(JSON.stringify(settings));
@@ -26,6 +27,16 @@ export async function updateSiteSettings(prevState: any, formData: FormData) {
         twitterUrl: formData.get('twitterUrl'),
         linkedinUrl: formData.get('linkedinUrl'),
         instagramUrl: formData.get('instagramUrl'),
+        // Promo
+        promoEnabled: formData.get('promoEnabled') === 'on',
+        promoTitle: formData.get('promoTitle'),
+        promoSubtitle: formData.get('promoSubtitle'),
+        promoButtonText: formData.get('promoButtonText'),
+        promoLink: formData.get('promoLink'),
+        promoFullImage: formData.get('promoFullImage') === 'on',
+        // TechBot
+        techBotEnabled: formData.get('techBotEnabled') === 'on',
+        techBotVideoUrl: formData.get('techBotVideoUrl'),
     };
 
     await SiteSettings.findOneAndUpdate({}, data, { upsert: true, new: true });
@@ -71,12 +82,21 @@ export async function getServices() {
     return JSON.parse(JSON.stringify(services));
 }
 
+export async function getServiceBySlug(slug: string) {
+    if (!slug) return null;
+    await connectToDatabase();
+    const service = await Service.findOne({ slug }).lean();
+    return JSON.parse(JSON.stringify(service));
+}
+
 export async function saveService(prevState: any, formData: FormData) {
     await connectToDatabase();
     const id = formData.get('id') as string;
     const data = {
         title: formData.get('title'),
         description: formData.get('description'),
+        longDescription: formData.get('longDescription'),
+        process: JSON.parse(formData.get('process') as string || '[]'),
         icon: formData.get('icon'),
         slug: formData.get('slug'),
         imageUrl: formData.get('imageUrl'),
@@ -116,6 +136,8 @@ export async function saveTool(prevState: any, formData: FormData) {
         name: formData.get('name'),
         description: formData.get('description'),
         imageUrl: formData.get('imageUrl'),
+        icon: formData.get('icon'),
+        category: formData.get('category') || 'Other',
         link: formData.get('link'),
     };
 
@@ -183,9 +205,10 @@ export async function deleteCareer(id: string) {
 export async function getSiteMedia() {
     await connectToDatabase();
     const media = await SiteMedia.find().lean();
+    const plainMedia = JSON.parse(JSON.stringify(media));
     // Convert array to object for easier lookup: { 'logo': 'data...', 'home-hero': 'data...' }
     const mediaMap: Record<string, any> = {};
-    media.forEach((item: any) => {
+    plainMedia.forEach((item: any) => {
         mediaMap[item.name] = item;
     });
     return mediaMap;

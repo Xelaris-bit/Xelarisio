@@ -10,25 +10,25 @@ const values = [
     icon: Gem,
     title: "Integrity",
     description:
-      "We Uphold The Highest Standards Of Integrity And Transparency In All Our Actions, Building Trust With Our Clients And Partners.",
+      "We uphold the highest standards of integrity and transparency in all our actions, building trust with our clients and partners.",
   },
   {
     icon: Handshake,
     title: "Customer Commitment",
     description:
-      "We Are Dedicated To Our Clients' Success, Developing Relationships That Make A Positive And Lasting Difference.",
+      "We are dedicated to our clients' success, developing relationships that make a positive and lasting difference.",
   },
   {
     icon: Award,
     title: "Quality",
     description:
-      "We Provide Outstanding, Unsurpassed Service That Delivers Premium Value And Ensures Flawless Product Performance.",
+      "We provide outstanding, unsurpassed service that delivers premium value and ensures flawless product performance.",
   },
   {
     icon: Lightbulb,
     title: "Innovation",
     description:
-      "We Constantly Pursue New Ideas And Creative Solutions To Drive Success And Stay Ahead In A Dynamic Industry.",
+      "We constantly pursue new ideas and creative solutions to drive success and stay ahead in a dynamic industry.",
   },
 ];
 
@@ -43,7 +43,7 @@ const CoreValues = () => {
             Our Core Values
           </h2>
           <p className="mt-4 text-lg text-slate-300">
-            The Principles That Guide Our Work And Define Our Culture.
+            The principles that guide our work and define our culture.
           </p>
         </div>
 

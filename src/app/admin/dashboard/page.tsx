@@ -1,20 +1,11 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import SettingsForm from "@/components/admin/SettingsForm";
-import TeamManager from "@/components/admin/TeamManager";
-import ServiceManager from "@/components/admin/ServiceManager";
-import CareerManager from "@/components/admin/CareerManager";
-import ToolManager from "@/components/admin/ToolManager";
-import MediaManager from "@/components/admin/MediaManager";
 import { getSiteSettings, getTeamMembers, getServices, getTools, getCareers, getSiteMedia } from "../data-actions";
 import { LogOut } from "lucide-react";
 import { logout } from "../actions";
 import { Button } from "@/components/ui/button";
-
 import { cookies } from 'next/headers';
-import ActivityLog from "@/components/admin/ActivityLog";
-import ManagerManager from "@/components/admin/ManagerManager"; // Import ManagerManager
 import { getActivities } from "../activity-actions";
-import { getManagers } from "../manager-actions"; // Import getManagers
+import { getManagers } from "../manager-actions";
+import DashboardTabs from "@/components/admin/DashboardTabs";
 
 export const dynamic = 'force-dynamic';
 
@@ -84,37 +75,20 @@ export default async function AdminDashboard() {
                     </div>
                 </div>
 
-                <Tabs defaultValue={hasAccess('settings') ? "settings" : (isSuperAdmin ? "managers" : (permissions[0] || "activity"))} className="space-y-6">
-                    <TabsList className="bg-black/20 p-1 backdrop-blur-md border border-white/10 rounded-xl w-full justify-start h-auto flex-wrap">
-                        {/* Super Admin Only: Managers Tab */}
-                        {isSuperAdmin && (
-                            <TabsTrigger value="managers" className="data-[state=active]:bg-white/20 data-[state=active]:text-white text-white/70 rounded-lg px-6 py-3 ml-1 my-1">👥 Managers</TabsTrigger>
-                        )}
-
-                        {/* Conditionally Render Tabs */}
-                        {hasAccess('settings') && <TabsTrigger value="settings" className="data-[state=active]:bg-white/20 data-[state=active]:text-white text-white/70 rounded-lg px-6 py-3 ml-1 my-1">General Settings</TabsTrigger>}
-                        {hasAccess('media') && <TabsTrigger value="media" className="data-[state=active]:bg-white/20 data-[state=active]:text-white text-white/70 rounded-lg px-6 py-3 ml-1 my-1">Images & Logo</TabsTrigger>}
-                        {hasAccess('team') && <TabsTrigger value="team" className="data-[state=active]:bg-white/20 data-[state=active]:text-white text-white/70 rounded-lg px-6 py-3 ml-1 my-1">Team</TabsTrigger>}
-                        {hasAccess('services') && <TabsTrigger value="services" className="data-[state=active]:bg-white/20 data-[state=active]:text-white text-white/70 rounded-lg px-6 py-3 ml-1 my-1">Services</TabsTrigger>}
-                        {hasAccess('careers') && <TabsTrigger value="careers" className="data-[state=active]:bg-white/20 data-[state=active]:text-white text-white/70 rounded-lg px-6 py-3 ml-1 my-1">Careers</TabsTrigger>}
-                        {hasAccess('tools') && <TabsTrigger value="tools" className="data-[state=active]:bg-white/20 data-[state=active]:text-white text-white/70 rounded-lg px-6 py-3 ml-1 my-1">Tools</TabsTrigger>}
-
-                        {/* Activity Log - Restricted access */}
-                        {hasAccess('activity') && <TabsTrigger value="activity" className="data-[state=active]:bg-white/20 data-[state=active]:text-white text-white/70 rounded-lg px-6 py-3 ml-1 my-1">Activity Log</TabsTrigger>}
-                    </TabsList>
-
-                    <div className="rounded-2xl bg-white/80 border border-white/10 p-6 backdrop-blur-sm shadow-inner text-foreground">
-                        {isSuperAdmin && <TabsContent value="managers"><ManagerManager initialManagers={managers} /></TabsContent>}
-
-                        {hasAccess('settings') && <TabsContent value="settings"><SettingsForm initialData={settings} /></TabsContent>}
-                        {hasAccess('media') && <TabsContent value="media"><MediaManager initialMedia={media} /></TabsContent>}
-                        {hasAccess('team') && <TabsContent value="team"><TeamManager initialData={teamMembers} /></TabsContent>}
-                        {hasAccess('services') && <TabsContent value="services"><ServiceManager initialData={services} /></TabsContent>}
-                        {hasAccess('careers') && <TabsContent value="careers"><CareerManager initialData={careers} /></TabsContent>}
-                        {hasAccess('tools') && <TabsContent value="tools"><ToolManager initialData={tools} /></TabsContent>}
-                        {hasAccess('activity') && <TabsContent value="activity"><ActivityLog activities={activities} isSuperAdmin={isSuperAdmin} /></TabsContent>}
-                    </div>
-                </Tabs>
+                <DashboardTabs
+                    role={role}
+                    permissions={permissions}
+                    data={{
+                        settings,
+                        teamMembers,
+                        services,
+                        tools,
+                        careers,
+                        media,
+                        activities,
+                        managers
+                    }}
+                />
             </div>
         </div>
     );

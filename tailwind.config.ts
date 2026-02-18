@@ -69,10 +69,25 @@ export default {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        float: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-10px)" },
+        },
+        blink: {
+          "0%, 96%, 98%": { transform: "scaleY(1)" },
+          "97%, 99%": { transform: "scaleY(0.1)" },
+        },
+        "pulse-glow": {
+          "0%, 100%": { opacity: "1", transform: "scale(1)" },
+          "50%": { opacity: "0.8", transform: "scale(1.05)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "float": "float 6s ease-in-out infinite",
+        "blink": "blink 4s infinite",
+        "pulse-glow": "pulse-glow 2s infinite",
       },
     },
   },

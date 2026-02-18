@@ -48,7 +48,7 @@ const Hero = ({ videoUrl }: { videoUrl?: string }) => {
       <div className="relative z-10 flex h-full flex-col items-center justify-center text-center text-primary-foreground">
         <div className="container mx-auto px-4">
           <h1 className="animate-in fade-in slide-in-from-bottom-12 duration-1000 font-headline text-4xl font-extrabold tracking-tight md:text-5xl lg:text-6xl">
-            Future <span className="text-accent">Unlocked</span> Experience <span className="text-accent">Innovation</span>.
+            Centre of <span className="text-accent">Excellence</span> in Technology & <span className="text-accent">Innovation</span>
           </h1>
 
           <div className="mt-8 h-12 flex justify-center items-center">

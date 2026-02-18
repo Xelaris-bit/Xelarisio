@@ -24,17 +24,20 @@ import { Textarea } from "@/components/ui/textarea";
 import { saveService, deleteService } from '@/app/admin/data-actions';
 import { useToast } from "@/hooks/use-toast";
 import Image from 'next/image';
+import { getIcon, iconList } from '@/lib/icons';
 
 export default function ServiceManager({ initialData }: { initialData: any[] }) {
     const router = useRouter();
     const [isOpen, setIsOpen] = useState(false);
     const [currentService, setCurrentService] = useState<any>(null);
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
+    const [processSteps, setProcessSteps] = useState<{ title: string; description: string }[]>([]);
     const { toast } = useToast();
 
     const handleOpen = (service: any = null) => {
         setCurrentService(service);
         setSelectedImage(service?.imageUrl || null);
+        setProcessSteps(service?.process || []);
         setIsOpen(true);
     };
 
@@ -57,6 +60,22 @@ export default function ServiceManager({ initialData }: { initialData: any[] }) 
         }
     };
 
+    const handleAddStep = () => {
+        setProcessSteps([...processSteps, { title: '', description: '' }]);
+    };
+
+    const handleRemoveStep = (index: number) => {
+        const newSteps = [...processSteps];
+        newSteps.splice(index, 1);
+        setProcessSteps(newSteps);
+    };
+
+    const handleStepChange = (index: number, field: 'title' | 'description', value: string) => {
+        const newSteps = [...processSteps];
+        newSteps[index][field] = value;
+        setProcessSteps(newSteps);
+    };
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
@@ -65,13 +84,15 @@ export default function ServiceManager({ initialData }: { initialData: any[] }) 
             formData.append('id', currentService._id);
         }
 
-        // Add image if selected
-        // Add image if selected, OR explicit empty string if removed
+        // Add image
         if (selectedImage) {
             formData.append('imageUrl', selectedImage);
         } else {
             formData.append('imageUrl', '');
         }
+
+        // Add process steps as JSON string
+        formData.append('process', JSON.stringify(processSteps));
 
         const result = await saveService(null, formData);
         if (result.success) {
@@ -83,6 +104,7 @@ export default function ServiceManager({ initialData }: { initialData: any[] }) 
 
     return (
         <div>
+            {/* ... Header and Table remain same ... */}
             <div className="flex justify-between items-center mb-4">
                 <h2 className="text-xl font-bold">Services</h2>
                 <Button onClick={() => handleOpen()} className="bg-primary text-white">
@@ -133,11 +155,11 @@ export default function ServiceManager({ initialData }: { initialData: any[] }) 
             </div>
 
             <Dialog open={isOpen} onOpenChange={setIsOpen}>
-                <DialogContent className="sm:max-w-[500px]">
+                <DialogContent className="sm:max-w-[700px] max-h-[90vh] overflow-y-auto">
                     <DialogHeader>
                         <DialogTitle>{currentService ? 'Edit Service' : 'Add New Service'}</DialogTitle>
                     </DialogHeader>
-                    <form className="space-y-4" onSubmit={handleSubmit}>
+                    <form className="space-y-6" onSubmit={handleSubmit}>
                         <div className="grid grid-cols-2 gap-4">
                             <div className="space-y-2">
                                 <Label htmlFor="title">Title</Label>
@@ -150,45 +172,144 @@ export default function ServiceManager({ initialData }: { initialData: any[] }) 
                         </div>
 
                         <div className="space-y-2">
-                            <Label htmlFor="description">Description</Label>
-                            <Textarea id="description" name="description" defaultValue={currentService?.description} required />
+                            <Label htmlFor="description">Short Description</Label>
+                            <Textarea id="description" name="description" defaultValue={currentService?.description} required rows={3} />
                         </div>
 
                         <div className="space-y-2">
-                            <Label htmlFor="icon">Icon Name (Lucide React)</Label>
-                            <Input id="icon" name="icon" defaultValue={currentService?.icon || 'Code'} required />
+                            <Label htmlFor="longDescription">Detailed Description (For Service Page)</Label>
+                            <Textarea
+                                id="longDescription"
+                                name="longDescription"
+                                defaultValue={currentService?.longDescription}
+                                placeholder="A comprehensive overview of the service..."
+                                className="min-h-[150px]"
+                            />
                         </div>
 
-                        <div className="space-y-2">
-                            <Label htmlFor="image">Service Image</Label>
-                            <div className="flex gap-4 items-center">
-                                {selectedImage ? (
-                                    <div className="flex items-center gap-2">
-                                        <div className="relative h-16 w-16 overflow-hidden rounded-md border">
-                                            <Image src={selectedImage} alt="Preview" fill className="object-cover" />
-                                        </div>
-                                        <Button
-                                            type="button"
-                                            variant="destructive"
-                                            size="sm"
-                                            onClick={() => {
-                                                setSelectedImage(null);
-                                                // Clear file input if possible
-                                                const fileInput = document.getElementById('image') as HTMLInputElement;
-                                                if (fileInput) fileInput.value = '';
-                                            }}
-                                        >
-                                            <Trash2 className="h-4 w-4" />
-                                        </Button>
-                                    </div>
-                                ) : (
-                                    <div className="h-16 w-16 rounded-md border border-dashed flex items-center justify-center text-muted-foreground bg-muted/50">
-                                        <ImageIcon className="h-6 w-6 opacity-50" />
-                                    </div>
-                                )}
-                                <Input id="image" type="file" accept="image/*" onChange={handleImageChange} className="max-w-[250px]" />
+                        <div className="space-y-4 rounded-lg border p-4 bg-muted/20">
+                            <div className="flex items-center justify-between">
+                                <Label className="text-base font-semibold">Our Process Steps</Label>
+                                <Button type="button" variant="outline" size="sm" onClick={handleAddStep} className="gap-2">
+                                    <Plus className="h-3 w-3" /> Add Step
+                                </Button>
                             </div>
-                            <p className="text-xs text-muted-foreground">Recommended size: 600x400px (3:2 aspect ratio)</p>
+
+                            {processSteps.length === 0 ? (
+                                <p className="text-sm text-muted-foreground text-center py-4">No process steps added yet.</p>
+                            ) : (
+                                <div className="space-y-4">
+                                    {processSteps.map((step, index) => (
+                                        <div key={index} className="grid gap-2 border-b pb-4 last:border-0 relative bg-white p-3 rounded shadow-sm">
+                                            <div className="absolute right-2 top-2">
+                                                <Button type="button" variant="ghost" size="icon" className="h-6 w-6 text-red-500" onClick={() => handleRemoveStep(index)}>
+                                                    <Trash2 className="h-3 w-3" />
+                                                </Button>
+                                            </div>
+                                            <div className="grid grid-cols-1 gap-2">
+                                                <Label className="text-xs">Step {index + 1} Title</Label>
+                                                <Input
+                                                    value={step.title}
+                                                    onChange={(e) => handleStepChange(index, 'title', e.target.value)}
+                                                    placeholder="e.g. Discovery & Research"
+                                                    required
+                                                />
+                                            </div>
+                                            <div className="grid grid-cols-1 gap-2">
+                                                <Label className="text-xs">Step Description</Label>
+                                                <Textarea
+                                                    value={step.description}
+                                                    onChange={(e) => handleStepChange(index, 'description', e.target.value)}
+                                                    placeholder="Describe this step..."
+                                                    required
+                                                    rows={2}
+                                                />
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-4">
+                            <div className="space-y-2 col-span-2">
+                                <Label>Service Icon</Label>
+                                <div className="border rounded-md p-4 bg-background">
+                                    <div className="flex items-center gap-4 mb-4">
+                                        <div className="flex-1">
+                                            <Input
+                                                placeholder="Search icons..."
+                                                onChange={(e) => {
+                                                    const search = e.target.value.toLowerCase();
+                                                    const icons = document.querySelectorAll('.icon-btn');
+                                                    icons.forEach((btn: any) => {
+                                                        const name = btn.getAttribute('title').toLowerCase();
+                                                        if (name.includes(search)) {
+                                                            btn.style.display = 'flex';
+                                                        } else {
+                                                            btn.style.display = 'none';
+                                                        }
+                                                    });
+                                                }}
+                                            />
+                                        </div>
+                                        <div className="flex items-center gap-2 border px-3 py-2 rounded-md bg-muted/50">
+                                            <span className="text-sm text-muted-foreground">Selected:</span>
+                                            {(() => {
+                                                const Icon = getIcon(currentService?.icon || 'Code');
+                                                return <Icon className="h-5 w-5 text-primary" />;
+                                            })()}
+                                            <span className="font-medium">{currentService?.icon || 'Code'}</span>
+                                        </div>
+                                    </div>
+
+                                    <div className="grid grid-cols-6 sm:grid-cols-8 md:grid-cols-10 gap-2 max-h-[200px] overflow-y-auto p-1">
+                                        {iconList.map((iconName) => {
+                                            const Icon = getIcon(iconName);
+                                            const isSelected = (currentService?.icon || 'Code') === iconName;
+                                            return (
+                                                <button
+                                                    key={iconName}
+                                                    type="button"
+                                                    title={iconName}
+                                                    className={`icon-btn flex items-center justify-center p-2 rounded-md hover:bg-accent hover:text-accent-foreground transition-colors ${isSelected ? 'bg-primary text-primary-foreground hover:bg-primary/90' : 'bg-muted/30'}`}
+                                                    onClick={() => setCurrentService({ ...currentService, icon: iconName })}
+                                                >
+                                                    <Icon className="h-5 w-5" />
+                                                </button>
+                                            );
+                                        })}
+                                    </div>
+                                    <input type="hidden" name="icon" value={currentService?.icon || 'Code'} />
+                                </div>
+                            </div>
+                            {/* Removed original icon input, using hidden input above */}
+                            <div className="space-y-2">
+                                <Label htmlFor="image">Service Image</Label>
+                                <div className="flex gap-4 items-center">
+                                    {selectedImage ? (
+                                        <div className="flex items-center gap-2">
+                                            <div className="relative h-12 w-12 overflow-hidden rounded-md border">
+                                                <Image src={selectedImage} alt="Preview" fill className="object-cover" />
+                                            </div>
+                                            <Button
+                                                type="button"
+                                                variant="destructive"
+                                                size="sm"
+                                                className="h-8 w-8 p-0"
+                                                onClick={() => {
+                                                    setSelectedImage(null);
+                                                    const fileInput = document.getElementById('image') as HTMLInputElement;
+                                                    if (fileInput) fileInput.value = '';
+                                                }}
+                                            >
+                                                <Trash2 className="h-3 w-3" />
+                                            </Button>
+                                        </div>
+                                    ) : null}
+                                    <Input id="image" type="file" accept="image/*" onChange={handleImageChange} />
+                                </div>
+                            </div>
                         </div>
 
                         <div className="flex justify-end pt-4">
@@ -197,6 +318,6 @@ export default function ServiceManager({ initialData }: { initialData: any[] }) 
                     </form>
                 </DialogContent>
             </Dialog>
-        </div>
+        </div >
     );
 }

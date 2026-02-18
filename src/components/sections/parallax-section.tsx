@@ -7,7 +7,7 @@ const ParallaxSection = () => {
   const parallaxImage = placeholderImages.placeholderImages.find(
     (p) => p.id === "parallax-bg"
   );
-  
+
   if (!parallaxImage) return null;
 
   return (
@@ -28,8 +28,8 @@ const ParallaxSection = () => {
             Our Blueprint For Success
           </h2>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-primary-foreground/90">
-            From Concept And Strategy To Development And Deployment, We Follow A
-            Meticulous Process To Ensure Extraordinary Results.
+            From concept and strategy to development and deployment, we follow a
+            meticulous process to ensure extraordinary results.
           </p>
           <div className="mt-8">
             <Button

@@ -10,6 +10,16 @@ const siteSettingsSchema = new mongoose.Schema({
     twitterUrl: String,
     linkedinUrl: String,
     instagramUrl: String,
+    // Promotion Banner Settings
+    promoEnabled: { type: Boolean, default: false },
+    promoTitle: { type: String, default: 'WE PROVIDE GREAT IDEAS TO GROW YOUR BUSINESS!' },
+    promoSubtitle: { type: String, default: 'Unlock your potential with our expert digital solutions.' },
+    promoButtonText: { type: String, default: 'CONTACT US' },
+    promoLink: { type: String, default: '/contact' },
+    promoFullImage: { type: Boolean, default: false }, // New field
+    // TechBot Settings
+    techBotEnabled: { type: Boolean, default: true },
+    techBotVideoUrl: { type: String, default: '' },
 }, { timestamps: true });
 
 const teamMemberSchema = new mongoose.Schema({
@@ -22,6 +32,11 @@ const teamMemberSchema = new mongoose.Schema({
 const serviceSchema = new mongoose.Schema({
     title: { type: String, required: true },
     description: { type: String, required: true },
+    longDescription: { type: String }, // Detailed description for the service page
+    process: [{
+        title: { type: String, required: true },
+        description: { type: String, required: true },
+    }], // Array of process steps
     icon: String,
     slug: { type: String, required: true, unique: true },
     imageUrl: String,
@@ -30,7 +45,14 @@ const serviceSchema = new mongoose.Schema({
 const toolSchema = new mongoose.Schema({
     name: { type: String, required: true },
     description: String,
-    imageUrl: String,
+    imageUrl: String, // Kept for custom uploads/fallback
+    icon: String, // SimpleIcons slug (e.g. "react", "nextdotjs")
+    category: {
+        type: String,
+        required: true,
+        default: 'Other',
+        enum: ['Software Development', 'QA & Testing', 'Digital Marketing', 'Data Analysis', 'DevOps', 'Media & Creative', 'Other']
+    },
     link: String,
 }, { timestamps: true });
 

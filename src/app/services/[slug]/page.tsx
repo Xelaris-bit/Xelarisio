@@ -1,80 +1,61 @@
 
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
-import { services as servicesData } from '@/lib/services-data.ts';
 import Image from 'next/image';
-import placeholderImages from '@/lib/placeholder-images.json';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import {
-  Code,
-  School,
-  Cuboid,
-  Megaphone,
-  AreaChart,
-  Cloud,
-  CheckCircle,
-} from 'lucide-react';
-import type { ReactElement } from 'react';
+import * as LucideIcons from 'lucide-react';
 import { notFound } from 'next/navigation';
 import { FadeIn } from '@/components/fade-in';
+import { getServiceBySlug, getSiteMedia } from '@/app/admin/data-actions';
+import { cn } from '@/lib/utils'; // Assuming cn utility exists
 
-interface Service {
-  id: string;
-  slug: string;
-  icon: ReactElement;
-  title: string;
-  description: string;
-  longDescription: string;
+export const dynamic = 'force-dynamic';
+
+function IconByName({ name, className }: { name: string; className?: string }) {
+  const Icon = (LucideIcons as any)[name];
+  return Icon ? <Icon className={className} /> : <LucideIcons.Activity className={className} />;
 }
 
-const services: Service[] = servicesData.map((s) => ({
-  ...s,
-  icon: {
-    'service-software': <Code className="h-10 w-10 text-accent" />,
-    'service-elearning': <School className="h-10 w-10 text-accent" />,
-    'service-multimedia': <Cuboid className="h-10 w-10 text-accent" />,
-    'service-marketing': <Megaphone className="h-10 w-10 text-accent" />,
-    'service-qa': <CheckCircle className="h-10 w-10 text-accent" />,
-    'service-data-analysis': <AreaChart className="h-10 w-10 text-accent" />,
-    'service-cloud-devops': <Cloud className="h-10 w-10 text-accent" />,
-  }[s.id] as ReactElement,
-}));
+export default async function ServicePage({ params }: { params: { slug: string } }) {
+  // Await params if necessary in newer Next.js versions, but here it is usually synchronous object in page props
+  // However, ensuring we treat it as potentially async is safe or just accessing properties
+  const { slug } = params;
 
-export default function ServicePage({ params }: { params: { slug: string } }) {
-  const service = services.find((s) => s.slug === params.slug);
+  const [service, media] = await Promise.all([
+    getServiceBySlug(slug),
+    getSiteMedia()
+  ]);
 
   if (!service) {
     notFound();
   }
 
-  const serviceImage = placeholderImages.placeholderImages.find(
-    (p) => p.id === service.id
-  );
+  // Use the uploaded image, or fallback to a placeholder from media, or a default
+  // media['service-hero'] could be a fallback if we had one
+  const serviceImage = service.imageUrl || media['services-hero']?.data || '/placeholder.jpg';
 
   return (
     <div className="flex min-h-screen flex-col">
-      <Header />
+      <Header logoUrl={media['logo']?.data} />
       <main className="flex-1">
         <FadeIn>
           <section className="relative h-[60vh] w-full bg-primary text-primary-foreground group overflow-hidden">
             <div className="absolute inset-0">
-              {serviceImage && (
-                <Image
-                  src={serviceImage.imageUrl}
-                  alt={serviceImage.description}
-                  fill
-                  priority
-                  quality={100}
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  data-ai-hint={serviceImage.imageHint}
-                />
-              )}
+              <Image
+                src={serviceImage}
+                alt={service.title}
+                fill
+                priority
+                quality={100}
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-primary/60" />
             </div>
-            <div className="relative z-10 flex h-full flex-col items-center justify-center text-center bg-primary/60">
+            <div className="relative z-10 flex h-full flex-col items-center justify-center text-center">
               <div className="container mx-auto px-4">
                 <div className="mb-4 flex justify-center text-accent">
-                  {service.icon}
+                  <IconByName name={service.icon || 'Code'} className="h-12 w-12" />
                 </div>
                 <h1 className="text-4xl font-bold md:text-5xl">{service.title}</h1>
                 <p className="mt-4 max-w-2xl mx-auto text-lg text-primary-foreground/90">
@@ -84,18 +65,66 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
             </div>
           </section>
         </FadeIn>
+
         <FadeIn>
-          <section className="section-padding bg-background">
+          <section className="section-padding bg-background py-16">
             <div className="container mx-auto px-4">
-              <div className="mx-auto max-w-3xl">
-                <h2 className="text-2xl font-bold text-primary mb-4">
-                  About Our {service.title} Services
-                </h2>
-                <p className="text-lg text-foreground/80 leading-relaxed">
-                  {service.longDescription}
-                </p>
-                <div className="mt-12 text-center">
-                  <Button size="lg" asChild>
+              <div className="mx-auto max-w-4xl">
+                <div className="mb-12">
+                  <h2 className="text-3xl font-bold text-primary mb-6">
+                    About Our {service.title} Services
+                  </h2>
+                  <div className="text-lg text-foreground/80 leading-relaxed whitespace-pre-line">
+                    {service.longDescription || service.description}
+                  </div>
+                </div>
+
+                {/* OUR PROCESS SECTION */}
+                {service.process && service.process.length > 0 && (
+                  <div className="mt-20">
+                    <h2 className="text-3xl font-bold text-primary mb-12 text-center">Our Process</h2>
+                    <div className="relative border-l-2 border-primary/20 ml-6 md:ml-0 md:pl-0 space-y-12">
+                      {service.process.map((step: any, index: number) => (
+                        <div key={index} className="relative pl-12 md:pl-0">
+                          {/* Timeline Dot */}
+                          <div className="absolute top-0 left-[-9px] md:left-1/2 md:-ml-3 h-6 w-6 rounded-full bg-primary border-4 border-background z-10 shadow-sm" />
+
+                          <div className={cn(
+                            "md:flex items-start justify-between gap-8 group",
+                            index % 2 === 0 ? "md:flex-row-reverse" : ""
+                          )}>
+                            <div className="hidden md:block w-1/2" /> {/* Spacer */}
+
+                            <div className={cn(
+                              "md:w-1/2 p-6 rounded-2xl bg-muted/30 border border-muted hover:shadow-lg transition-shadow duration-300 relative",
+                              index % 2 === 0 ? "md:text-left" : "md:text-right"
+                            )}>
+                              {/* Number Watermark */}
+                              <div className={cn(
+                                "absolute -top-4 text-6xl font-black text-primary/5 select-none z-0",
+                                index % 2 === 0 ? "right-4" : "left-4"
+                              )}>
+                                {index + 1}
+                              </div>
+
+                              <div className="relative z-10">
+                                <h3 className="text-xl font-bold text-primary mb-2 flex items-center gap-2 md:inline-flex">
+                                  {step.title}
+                                </h3>
+                                <p className="text-muted-foreground">
+                                  {step.description}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                <div className="mt-20 text-center">
+                  <Button size="lg" asChild className="text-lg px-8 py-6 rounded-full shadow-xl hover:shadow-2xl transition-all">
                     <Link href="/contact">Get In Touch</Link>
                   </Button>
                 </div>

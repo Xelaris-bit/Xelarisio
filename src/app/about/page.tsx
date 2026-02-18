@@ -22,6 +22,13 @@ import OurJourney from "@/components/sections/our-journey";
 import { FadeIn } from "@/components/fade-in";
 import { getTeamMembers, getSiteMedia } from "@/app/admin/data-actions";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About Us - Xelaris Centre of Excellence",
+  description: "Founded by passionate experts, Xelaris empowers businesses to achieve excellence through creativity, technology, and strategy. Learn about our journey and mission.",
+};
+
 export const dynamic = 'force-dynamic';
 
 export default async function AboutPage() {
@@ -37,7 +44,7 @@ export default async function AboutPage() {
         <FadeIn>
           <PageHero
             title="Leading the Way in Digital Excellence"
-            subtitle="Meet the passionate team behind the innovation."
+            subtitle="Founded by passionate experts, empowering businesses to achieve excellence."
             imageId="about-hero"
             customImageUrl={media['about-hero']?.data}
           />

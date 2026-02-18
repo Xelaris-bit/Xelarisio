@@ -67,6 +67,8 @@ export default function ToolManager({ initialData }: { initialData: any[] }) {
 
         if (selectedImage) {
             formData.set('imageUrl', selectedImage);
+        } else {
+            formData.set('imageUrl', '');
         }
 
         const result = await saveTool(null, formData);
@@ -102,12 +104,25 @@ export default function ToolManager({ initialData }: { initialData: any[] }) {
                                 <TableRow key={tool._id}>
                                     <TableCell>
                                         {tool.imageUrl ? (
-                                            <div className="relative h-10 w-10 overflow-hidden rounded-md border">
-                                                <Image src={tool.imageUrl} alt={tool.name} fill className="object-contain p-1" />
+                                            <div className="relative h-10 w-10 overflow-hidden rounded-md border bg-gray-50 flex items-center justify-center">
+                                                <img
+                                                    src={tool.imageUrl}
+                                                    alt={tool.name}
+                                                    className="w-full h-full object-contain p-1"
+                                                />
                                             </div>
+                                        ) : tool.icon ? (
+                                            <img
+                                                src={`https://cdn.simpleicons.org/${tool.icon}`}
+                                                alt={tool.name}
+                                                className="h-8 w-8 object-contain"
+                                            />
                                         ) : <span className="text-xs text-muted-foreground">No Icon</span>}
                                     </TableCell>
-                                    <TableCell className="font-medium">{tool.name}</TableCell>
+                                    <TableCell className="font-medium">
+                                        {tool.name}
+                                        <div className="text-xs text-muted-foreground">{tool.category}</div>
+                                    </TableCell>
                                     <TableCell className="max-w-xs truncate" title={tool.description}>{tool.description}</TableCell>
                                     <TableCell className="text-right">
                                         <Button variant="ghost" size="icon" onClick={() => handleOpen(tool)}>
@@ -139,20 +154,84 @@ export default function ToolManager({ initialData }: { initialData: any[] }) {
                             <Input id="name" name="name" defaultValue={currentTool?.name} required />
                         </div>
 
+                        <div className="grid grid-cols-2 gap-4">
+                            <div className="space-y-2">
+                                <Label htmlFor="category">Category</Label>
+                                <select
+                                    id="category"
+                                    name="category"
+                                    defaultValue={currentTool?.category || 'Other'}
+                                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                                >
+                                    <option value="Software Development">Software Development</option>
+                                    <option value="QA & Testing">QA & Testing</option>
+                                    <option value="Digital Marketing">Digital Marketing</option>
+                                    <option value="Data Analysis">Data Analysis</option>
+                                    <option value="DevOps">DevOps</option>
+                                    <option value="Media & Creative">Media & Creative</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="icon">
+                                    Icon Slug
+                                    <a href="https://simpleicons.org/" target="_blank" rel="noreferrer" className="text-xs text-blue-500 ml-2 hover:underline">(SimpleIcons)</a>
+                                </Label>
+                                <Input id="icon" name="icon" defaultValue={currentTool?.icon} placeholder="e.g. react, docker" />
+                            </div>
+                        </div>
+
                         <div className="space-y-2">
                             <Label htmlFor="description">Description</Label>
                             <Textarea id="description" name="description" defaultValue={currentTool?.description} />
                         </div>
 
                         <div className="space-y-2">
-                            <Label htmlFor="image">Tool Icon/Logo</Label>
-                            <div className="flex gap-4 items-center">
-                                {selectedImage && (
-                                    <div className="relative h-16 w-16 overflow-hidden rounded-md border text-center flex items-center justify-center">
-                                        <Image src={selectedImage} alt="Preview" fill className="object-contain p-1" />
+                            <Label htmlFor="image">Custom Image (Optional fallback)</Label>
+                            <div className="flex flex-col gap-3">
+                                <div className="flex gap-4 items-center">
+                                    {selectedImage ? (
+                                        <div className="relative h-16 w-16 overflow-hidden rounded-md border text-center flex items-center justify-center bg-gray-50 group">
+                                            <img
+                                                src={selectedImage}
+                                                alt="Preview"
+                                                className="w-full h-full object-contain p-1"
+                                            />
+                                            <button
+                                                type="button"
+                                                onClick={() => {
+                                                    setSelectedImage(null);
+                                                    // Also reset file input if possible, but difficult with React ref. 
+                                                    // We can just rely on selectedImage state being null.
+                                                }}
+                                                className="absolute inset-0 bg-black/50 text-white opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity"
+                                            >
+                                                <Trash2 className="h-6 w-6" />
+                                            </button>
+                                        </div>
+                                    ) : (
+                                        <div className="h-16 w-16 border border-dashed rounded-md flex items-center justify-center text-muted-foreground text-xs">
+                                            No Image
+                                        </div>
+                                    )}
+                                    <div className="flex-1 space-y-2">
+                                        <Input
+                                            placeholder="Paste Image URL or Upload File"
+                                            value={selectedImage || ''}
+                                            onChange={(e) => setSelectedImage(e.target.value)}
+                                            className="font-mono text-xs"
+                                        />
+                                        <Input
+                                            id="image"
+                                            type="file"
+                                            accept="image/*"
+                                            onChange={handleImageChange}
+                                        />
                                     </div>
-                                )}
-                                <Input id="image" type="file" accept="image/*" onChange={handleImageChange} />
+                                </div>
+                                <p className="text-xs text-muted-foreground">
+                                    Paste a direct image URL above or upload a file. The content above is what will be saved.
+                                </p>
                             </div>
                         </div>
 

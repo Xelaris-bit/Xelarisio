@@ -6,8 +6,8 @@ import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
 import { formatDistanceToNow } from 'date-fns';
-import { Activity, LogIn, LogOut, Edit, Plus, Trash2, ShieldAlert } from 'lucide-react';
-import { clearActivities } from '@/app/admin/activity-actions';
+import { Activity, LogIn, LogOut, Edit, Plus, Trash2, ShieldAlert, Download } from 'lucide-react';
+import { clearActivities, getAllActivities } from '@/app/admin/activity-actions';
 import { useToast } from "@/hooks/use-toast";
 
 type ActivityLogProps = {
@@ -44,6 +44,54 @@ export default function ActivityLog({ activities = [], isSuperAdmin = false }: A
         }
     };
 
+    async function handleExport() {
+        try {
+            toast({ title: "Exporting...", description: "Generating activity log CSV..." });
+
+            const allActivities = await getAllActivities();
+
+            if (!allActivities || allActivities.length === 0) {
+                toast({ title: "Info", description: "No activity logs to export." });
+                return;
+            }
+
+            // CSV Header
+            const headers = ["Timestamp", "Action", "Target", "Details", "ID"];
+
+            // CSV Rows
+            const rows = allActivities.map((log: any) => [
+                new Date(log.timestamp).toISOString(),
+                log.action,
+                log.target,
+                `"${log.details.replace(/"/g, '""')}"`, // Escape quotes
+                log._id
+            ]);
+
+            // Combine into CSV string
+            const csvContent = [
+                headers.join(","),
+                ...rows.map((row: any[]) => row.join(","))
+            ].join("\n");
+
+            // Create Blob and Download
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.setAttribute("href", url);
+            link.setAttribute("download", `activity_log_${new Date().toISOString().split('T')[0]}.csv`);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            toast({ title: "Success", description: "Activity log exported successfully." });
+
+        } catch (error) {
+            console.error("Export failed:", error);
+            toast({ title: "Error", description: "Failed to export logs.", variant: "destructive" });
+        }
+    }
+
     async function handleClear() {
         if (!confirm('Are you sure you want to clear the ENTIRE activity log? This cannot be undone.')) return;
 
@@ -69,18 +117,30 @@ export default function ActivityLog({ activities = [], isSuperAdmin = false }: A
                     </CardTitle>
                     <p className="text-slate-500 mt-1">Track all admin logins, logouts, and content updates.</p>
                 </div>
-                {isSuperAdmin && activities.length > 0 && (
+                <div className="flex items-center gap-2">
                     <Button
-                        variant="destructive"
+                        variant="outline"
                         size="sm"
-                        onClick={handleClear}
-                        disabled={isClearing}
-                        className="gap-2"
+                        onClick={handleExport}
+                        className="gap-2 border-slate-300 bg-white text-slate-700 hover:bg-slate-200 hover:text-slate-900 font-medium transition-colors"
                     >
-                        <ShieldAlert className="h-4 w-4" />
-                        {isClearing ? 'Clearing...' : 'Clear Log'}
+                        <Download className="h-4 w-4" />
+                        Export to Excel
                     </Button>
-                )}
+
+                    {isSuperAdmin && activities.length > 0 && (
+                        <Button
+                            variant="destructive"
+                            size="sm"
+                            onClick={handleClear}
+                            disabled={isClearing}
+                            className="gap-2"
+                        >
+                            <ShieldAlert className="h-4 w-4" />
+                            {isClearing ? 'Clearing...' : 'Clear Log'}
+                        </Button>
+                    )}
+                </div>
             </CardHeader>
             <CardContent>
                 <ScrollArea className="h-[600px] pr-4">

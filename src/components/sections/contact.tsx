@@ -12,14 +12,14 @@ const ContactSection = ({ settings }: { settings?: any }) => {
                 <div className="text-center mb-12">
                     <h2 className="text-3xl md:text-4xl font-bold">Connect With <span className="text-accent">Future Creators</span></h2>
                     <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
-                        Fill Out The Form Below Or Use The Contact Details To Get In Touch.
+                        Fill out the form below or use the contact details to get in touch.
                     </p>
                 </div>
                 <div className="grid md:grid-cols-2 gap-12 items-start">
                     <div className="space-y-8 animate-in fade-in slide-in-from-left-20 duration-1000">
                         <div>
                             <h3 className="text-2xl font-semibold">Get In Touch</h3>
-                            <p className="text-muted-foreground mt-2">Find Us At Our Office Or Reach Out Via Email Or Phone.</p>
+                            <p className="text-muted-foreground mt-2">Find us at our office or reach out via email or phone.</p>
                         </div>
                         <div className="space-y-4">
                             <div className="flex items-start gap-4">
@@ -60,7 +60,7 @@ const ContactSection = ({ settings }: { settings?: any }) => {
                     <Card className="animate-in fade-in slide-in-from-right-20 duration-1000" style={{ animationDelay: '200ms' }}>
                         <CardHeader>
                             <CardTitle>Send A Message</CardTitle>
-                            <CardDescription>We'll Get Back To You As Soon As Possible.</CardDescription>
+                            <CardDescription>We'll get back to you as soon as possible.</CardDescription>
                         </CardHeader>
                         <CardContent>
                             <ContactForm />

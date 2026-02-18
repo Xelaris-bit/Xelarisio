@@ -7,6 +7,13 @@ import { FadeIn } from "@/components/fade-in";
 
 import { getServices, getSiteMedia } from "@/app/admin/data-actions";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Our Services - Xelaris End-to-End Solutions",
+  description: "Discover our end-to-end solutions in Software Development, eLearning, 3D & Multimedia, Digital Marketing, and Data Analysis. We ensure your organization stays ahead.",
+};
+
 export const dynamic = 'force-dynamic';
 
 export default async function ServicesPage() {
@@ -22,7 +29,7 @@ export default async function ServicesPage() {
         <FadeIn>
           <PageHero
             title="Innovation That Moves You Forward"
-            subtitle="Explore The Wide Range Of Services We Offer To Help Your Business Grow."
+            subtitle="Delivering end-to-end solutions across software, eLearning, 3D, marketing, and data."
             imageId="services-hero"
             customImageUrl={media['services-hero']?.data}
           />

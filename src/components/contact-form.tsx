@@ -12,7 +12,19 @@ import { Loader2, Send } from "lucide-react";
 import { Label } from "./ui/label";
 import PhoneInput from 'react-phone-number-input';
 
-const initialState = {
+interface ContactFormState {
+  message: string;
+  errors?: {
+    name?: string[];
+    email?: string[];
+    phone?: string[];
+    subject?: string[];
+    message?: string[];
+  };
+  success: boolean;
+}
+
+const initialState: ContactFormState = {
   message: '',
   errors: {},
   success: false,
@@ -56,40 +68,41 @@ export default function ContactForm() {
 
   return (
     <form ref={formRef} action={formAction} className="space-y-6">
-        <div className="space-y-2">
-            <Label htmlFor="name">Name</Label>
-            <Input id="name" name="name" placeholder="Your Name" required />
-            {state.errors?.name && <p className="text-sm font-medium text-destructive">{state.errors.name[0]}</p>}
-        </div>
-        <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
-            <Input id="email" name="email" type="email" placeholder="Your Email" required />
-            {state.errors?.email && <p className="text-sm font-medium text-destructive">{state.errors.email[0]}</p>}
-        </div>
-        <div className="space-y-2">
-            <Label htmlFor="phone">Mobile Number</Label>
-            <PhoneInput
-              id="phone"
-              name="phone"
-              placeholder="Enter phone number"
-              value={phoneValue}
-              onChange={setPhoneValue}
-              international
-              countryCallingCodeEditable={false}
-            />
-            {state.errors?.phone && <p className="text-sm font-medium text-destructive">{state.errors.phone[0]}</p>}
-        </div>
-        <div className="space-y-2">
-            <Label htmlFor="subject">Subject</Label>
-            <Input id="subject" name="subject" placeholder="What Is This About?" required />
-            {state.errors?.subject && <p className="text-sm font-medium text-destructive">{state.errors.subject[0]}</p>}
-        </div>
-        <div className="space-y-2">
-            <Label htmlFor="message">Message</Label>
-            <Textarea id="message" name="message" placeholder="Your Message..." rows={5} required />
-            {state.errors?.message && <p className="text-sm font-medium text-destructive">{state.errors.message[0]}</p>}
-        </div>
-        <SubmitButton />
+      <div className="space-y-2">
+        <Label htmlFor="name">Name</Label>
+        <Input id="name" name="name" placeholder="Your Name" required />
+        {state.errors?.name && <p className="text-sm font-medium text-destructive">{state.errors.name[0]}</p>}
+      </div>
+      <div className="space-y-2">
+        <Label htmlFor="email">Email</Label>
+        <Input id="email" name="email" type="email" placeholder="Your Email" required />
+        {state.errors?.email && <p className="text-sm font-medium text-destructive">{state.errors.email[0]}</p>}
+      </div>
+      <div className="space-y-2">
+        <Label htmlFor="phone">Mobile Number</Label>
+        <PhoneInput
+          id="phone"
+          name="phone"
+          placeholder="Enter phone number"
+          value={phoneValue}
+          onChange={setPhoneValue}
+          international
+          countryCallingCodeEditable={false}
+          suppressHydrationWarning
+        />
+        {state.errors?.phone && <p className="text-sm font-medium text-destructive">{state.errors.phone[0]}</p>}
+      </div>
+      <div className="space-y-2">
+        <Label htmlFor="subject">Subject</Label>
+        <Input id="subject" name="subject" placeholder="What Is This About?" required />
+        {state.errors?.subject && <p className="text-sm font-medium text-destructive">{state.errors.subject[0]}</p>}
+      </div>
+      <div className="space-y-2">
+        <Label htmlFor="message">Message</Label>
+        <Textarea id="message" name="message" placeholder="Your Message..." rows={5} required />
+        {state.errors?.message && <p className="text-sm font-medium text-destructive">{state.errors.message[0]}</p>}
+      </div>
+      <SubmitButton />
     </form>
   );
 }

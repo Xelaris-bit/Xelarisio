@@ -59,27 +59,27 @@ const WhoWeAre = ({ hideTitle = false }: WhoWeAreProps) => {
 
             <div className="space-y-4 text-foreground/80">
               <p>
-                Xelaris Is A Centre Of Excellence In Technology And Innovation,
-                Delivering End-To-End Solutions Across Software Development &amp;
-                Testing, Elearning, 3D &amp; Multimedia, Digital Marketing, And
-                Data Analysis. Founded By A Team Of Passionate Experts, We
-                Empower Businesses To Achieve Excellence By Combining
-                Creativity, Technology, And Strategy. From Building And Testing
-                Robust Software To Crafting Immersive Elearning Experiences,
-                Creating Cutting-Edge Multimedia Solutions, Driving Impactful
-                Digital Marketing Campaigns, And Unlocking The Power Of Data —
-                Xelaris Ensures Your Organization Stays Ahead In A Fast-Changing
-                Digital World.
+                Xelaris is a Centre of Excellence in technology and innovation,
+                delivering end-to-end solutions across software development &amp;
+                testing, eLearning, 3D &amp; multimedia, digital marketing, and
+                data analysis. Founded by a team of passionate experts, we
+                empower businesses to achieve excellence by combining
+                creativity, technology, and strategy. From building and testing
+                robust software to crafting immersive eLearning experiences,
+                creating cutting-edge multimedia solutions, driving impactful
+                digital marketing campaigns, and unlocking the power of data —
+                Xelaris ensures your organization stays ahead in a fast-changing
+                digital world.
               </p>
               <p>
-                Our Expert Team Blends Innovation With Proven Methods To Create
-                Customised Solutions. From Flawless Software To Impactful
-                Digital Strategies, We Help Businesses Grow, Perform, And Stay
-                Ahead In Today’s Competitive Digital World.
+                Our expert team blends innovation with proven methods to create
+                customised solutions. From flawless software to impactful
+                digital strategies, we help businesses grow, perform, and stay
+                ahead in today’s competitive digital world.
               </p>
               <p>
-                Reach Out Today And Take Your Software Excellence To The Next
-                Level With Xelaris!
+                Reach out today and take your software excellence to the next
+                level with Xelaris!
               </p>
             </div>
           </div>

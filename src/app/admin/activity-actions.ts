@@ -34,6 +34,19 @@ export async function getActivities() {
     }
 }
 
+export async function getAllActivities() {
+    try {
+        await connectToDatabase();
+        const activities = await AdminActivity.find()
+            .sort({ timestamp: -1 })
+            .lean();
+        return JSON.parse(JSON.stringify(activities));
+    } catch (error) {
+        console.error('Failed to fetch all activities:', error);
+        return [];
+    }
+}
+
 
 export async function clearActivities() {
     // Basic Super Admin Check (Env Vars or Cookie Role)

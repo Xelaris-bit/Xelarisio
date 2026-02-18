@@ -14,11 +14,10 @@ const MissionVision = () => {
                   <h3 className="text-2xl font-bold text-primary">Our Mission</h3>
                 </div>
                 <p className="text-foreground/80">
-                  To Empower Businesses By Ensuring Their Software Applications Are
-                  Of The Highest Quality. We Are Committed To Providing
-                  Comprehensive, Reliable, And Innovative Testing Solutions That
-                  Accelerate Development Cycles, Reduce Risks, And Enhance User
-                  Satisfaction.
+                  To empower businesses to achieve excellence by combining
+                  creativity, technology, and strategy. We deliver end-to-end
+                  solutions that ensure your organization stays ahead in a
+                  fast-changing digital world.
                 </p>
               </CardContent>
             </Card>
@@ -34,11 +33,10 @@ const MissionVision = () => {
                   <h3 className="text-2xl font-bold text-primary">Our Vision</h3>
                 </div>
                 <p className="text-foreground/80">
-                  To Be The Globally Recognized Leader In Software Quality
-                  Assurance, Setting The Industry Standard For Excellence,
-                  Reliability, And Innovation. We Aim To Build Long-Lasting
-                  Partnerships With Our Clients, Helping Them Launch Flawless
-                  Products.
+                  To be a globally recognized Centre of Excellence in technology
+                  and innovation. We aspire to drive impactful change through
+                  robust software, immersive experiences, and data-driven
+                  insights.
                 </p>
               </CardContent>
             </Card>
