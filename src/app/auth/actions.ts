@@ -28,7 +28,7 @@ export async function sendMagicLinkAction(email: string) {
             { expiresIn: "15m" } // 15 minute expiry
         );
 
-        const appUrl = process.env.NEXTAUTH_URL || "http://localhost:9002";
+        const appUrl = process.env.NEXTAUTH_URL || "https://xelarisio.vercel.app/";
         const loginUrl = `${appUrl}/auth/signin?token=${token}`;
 
         const resend = new Resend(process.env.RESEND_API_KEY!);
