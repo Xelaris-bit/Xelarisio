@@ -1,6 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { FadeIn } from "@/components/fade-in";
 import { cn } from "@/lib/utils";
+import { BorderBeam } from "@/components/ui/border-beam";
 
 const journeyData = [
   {
@@ -31,7 +32,7 @@ const journeyData = [
 
 const OurJourney = () => {
   return (
-    <section className="relative py-24 overflow-hidden bg-slate-950/80">
+    <section className="relative py-24 overflow-hidden bg-[#071436]">
       {/* Background Gradients - Blue and Green Theme */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-blue-900/10 rounded-full blur-[128px] -translate-y-1/2" />
@@ -50,7 +51,7 @@ const OurJourney = () => {
           </div>
         </FadeIn>
 
-        <div className="relative max-w-5xl mx-auto">
+        <div className="relative max-w-5xl mx-auto border border-white/5 rounded-3xl overflow-hidden bg-slate-900/20 backdrop-blur-sm p-4 md:p-12">
           {/* Vertical Timeline Line */}
           {/* Mobile: Left aligned at left-5 (20px), Desktop: Center aligned */}
           <div className="absolute left-5 top-0 h-full w-[2px] bg-gradient-to-b from-transparent via-blue-500/30 to-transparent md:left-1/2 md:-translate-x-1/2" />
@@ -99,6 +100,12 @@ const OurJourney = () => {
                         // But keeping structure clean.
                       )}>
                         <Card className="group relative overflow-hidden border-white/5 bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl hover:bg-slate-800/40 transition-all duration-500 hover:shadow-[0_0_30px_-5px_rgba(46,204,113,0.1)] rounded-2xl hover:-translate-y-1">
+                          <BorderBeam
+                            size={250}
+                            duration={12}
+                            colorFrom="#62B800"
+                            colorTo="#071436"
+                          />
                           <CardContent className="p-8">
                             {/* Hover Gradient Glow - Green/Blue */}
                             <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-green-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />

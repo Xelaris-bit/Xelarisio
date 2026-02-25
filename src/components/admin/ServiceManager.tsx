@@ -132,8 +132,12 @@ export default function ServiceManager({ initialData }: { initialData: any[] }) 
                                     <TableCell>{service.slug}</TableCell>
                                     <TableCell>
                                         {service.imageUrl ? (
-                                            <Image src={service.imageUrl} alt="Service" width={40} height={40} className="rounded object-cover" />
-                                        ) : <span className="text-muted-foreground text-xs">No Image</span>}
+                                            service.imageUrl.startsWith('data:video/') ? (
+                                                <video src={service.imageUrl} className="rounded object-cover h-10 w-10" muted playsInline />
+                                            ) : (
+                                                <Image src={service.imageUrl} alt="Service" width={40} height={40} className="rounded object-cover" />
+                                            )
+                                        ) : <span className="text-muted-foreground text-xs">No Image/Video</span>}
                                     </TableCell>
                                     <TableCell className="text-right">
                                         <Button variant="ghost" size="icon" onClick={() => handleOpen(service)}>
@@ -284,13 +288,20 @@ export default function ServiceManager({ initialData }: { initialData: any[] }) 
                                 </div>
                             </div>
                             {/* Removed original icon input, using hidden input above */}
-                            <div className="space-y-2">
-                                <Label htmlFor="image">Service Image</Label>
+                            <div className="space-y-4">
+                                <div className="space-y-1.5">
+                                    <Label htmlFor="image" className="text-base">Service Media</Label>
+                                    <p className="text-[0.8rem] text-muted-foreground">Upload an image, GIF, or video. Recommended pixel ratio: 16:9 (e.g., 1920x1080) for best display.</p>
+                                </div>
                                 <div className="flex gap-4 items-center">
                                     {selectedImage ? (
                                         <div className="flex items-center gap-2">
                                             <div className="relative h-12 w-12 overflow-hidden rounded-md border">
-                                                <Image src={selectedImage} alt="Preview" fill className="object-cover" />
+                                                {selectedImage.startsWith('data:video/') ? (
+                                                    <video src={selectedImage} autoPlay loop muted playsInline className="object-cover w-full h-full" />
+                                                ) : (
+                                                    <Image src={selectedImage} alt="Preview" fill className="object-cover" />
+                                                )}
                                             </div>
                                             <Button
                                                 type="button"
@@ -307,7 +318,7 @@ export default function ServiceManager({ initialData }: { initialData: any[] }) 
                                             </Button>
                                         </div>
                                     ) : null}
-                                    <Input id="image" type="file" accept="image/*" onChange={handleImageChange} />
+                                    <Input id="image" type="file" accept="image/*,video/*" onChange={handleImageChange} />
                                 </div>
                             </div>
                         </div>

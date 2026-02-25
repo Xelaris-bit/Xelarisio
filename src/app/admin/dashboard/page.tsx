@@ -1,39 +1,30 @@
 import { getSiteSettings, getTeamMembers, getServices, getTools, getCareers, getSiteMedia } from "../data-actions";
 import { LogOut } from "lucide-react";
-import { logout } from "../actions";
 import { Button } from "@/components/ui/button";
-import { cookies } from 'next/headers';
 import { getActivities } from "../activity-actions";
 import { getManagers } from "../manager-actions";
 import DashboardTabs from "@/components/admin/DashboardTabs";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/authOptions";
+import { redirect } from "next/navigation";
+import Link from "next/link";
 
 export const dynamic = 'force-dynamic';
 
 export default async function AdminDashboard() {
     // 1. Get Session Info
-    const cookieStore = await cookies();
-    const sessionCookie = cookieStore.get('admin_session');
-    let role = 'GUEST';
-    let permissions: string[] = [];
+    const session = await getServerSession(authOptions);
 
-    if (sessionCookie) {
-        try {
-            const session = JSON.parse(sessionCookie.value);
-            role = session.role;
-            permissions = session.permissions || [];
-        } catch (e) {
-            // Legacy cookie support (just "true" string) -> Treat as Super Admin
-            if (sessionCookie.value === 'true') {
-                role = 'SUPER_ADMIN';
-                permissions = ['all'];
-            }
-        }
+    if (!session) {
+        redirect("/auth/signin");
     }
 
-    const isSuperAdmin = role === 'SUPER_ADMIN';
+    const role = 'SUPER_ADMIN'; // Magic link logged in users default to highest permission
+    const permissions = ['all'];
+    const isSuperAdmin = true;
 
     // Helper to check access
-    const hasAccess = (perm: string) => isSuperAdmin || permissions.includes(perm);
+    const hasAccess = (perm: string) => true;
 
     // 2. Fetch Data
     const [settings, teamMembers, services, tools, careers, media, activities, managers] = await Promise.all([
@@ -65,13 +56,13 @@ export default async function AdminDashboard() {
                     <div className="flex items-center gap-4">
                         {/* Show Role Badge */}
                         <div className="px-3 py-1 rounded-full bg-white/20 text-white text-sm font-medium backdrop-blur-md border border-white/10">
-                            {role === 'SUPER_ADMIN' ? '👑 Super Admin' : '👤 Manager'}
+                            {session.user?.email}
                         </div>
-                        <form action={logout}>
-                            <Button variant="destructive" className="gap-2 shadow-lg hover:bg-red-600/90 rounded-full px-6">
+                        <Button variant="destructive" className="gap-2 shadow-lg hover:bg-red-600/90 rounded-full px-6" asChild>
+                            <Link href="/api/auth/signout">
                                 <LogOut className="h-4 w-4" /> Logout
-                            </Button>
-                        </form>
+                            </Link>
+                        </Button>
                     </div>
                 </div>
 

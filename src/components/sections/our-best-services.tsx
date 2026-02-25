@@ -48,14 +48,25 @@ export default function OurBestServices({ services = [] }: { services?: any[] })
                   <div className={`flex flex-col md:flex-row ${index % 2 === 1 ? 'md:flex-row-reverse' : ''}`}>
 
                     {/* Image Section */}
-                    <div className="relative h-64 w-full md:h-[400px] md:w-1/2 overflow-hidden bg-muted">
+                    <div className="relative w-full md:w-1/2 overflow-hidden bg-muted min-h-[300px] md:min-h-full flex-shrink-0">
                       {service.imageUrl ? (
-                        <Image
-                          src={service.imageUrl}
-                          alt={service.title}
-                          fill
-                          className="object-contain p-4 transition-transform duration-700 hover:scale-110"
-                        />
+                        service.imageUrl.startsWith('data:video/') ? (
+                          <video
+                            src={service.imageUrl}
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            className="object-cover w-full h-full transition-transform duration-700 hover:scale-110"
+                          />
+                        ) : (
+                          <Image
+                            src={service.imageUrl}
+                            alt={service.title}
+                            fill
+                            className="object-cover transition-transform duration-700 hover:scale-110"
+                          />
+                        )
                       ) : (
                         <div className="flex h-full w-full items-center justify-center text-muted-foreground bg-secondary/30">
                           <div className="flex flex-col items-center gap-4">

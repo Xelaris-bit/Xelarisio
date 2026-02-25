@@ -42,14 +42,25 @@ export default async function ServicePage({ params }: { params: { slug: string }
         <FadeIn>
           <section className="relative h-[60vh] w-full bg-primary text-primary-foreground group overflow-hidden">
             <div className="absolute inset-0">
-              <Image
-                src={serviceImage}
-                alt={service.title}
-                fill
-                priority
-                quality={100}
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-              />
+              {serviceImage.startsWith('data:video/') ? (
+                <video
+                  src={serviceImage}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"
+                />
+              ) : (
+                <Image
+                  src={serviceImage}
+                  alt={service.title}
+                  fill
+                  priority
+                  quality={100}
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+              )}
               <div className="absolute inset-0 bg-primary/60" />
             </div>
             <div className="relative z-10 flex h-full flex-col items-center justify-center text-center">

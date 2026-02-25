@@ -81,6 +81,11 @@ export default {
           "0%, 100%": { opacity: "1", transform: "scale(1)" },
           "50%": { opacity: "0.8", transform: "scale(1.05)" },
         },
+        "border-beam": {
+          "100%": {
+            "offset-distance": "100%",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -88,6 +93,7 @@ export default {
         "float": "float 6s ease-in-out infinite",
         "blink": "blink 4s infinite",
         "pulse-glow": "pulse-glow 2s infinite",
+        "border-beam": "border-beam var(--duration) infinite linear",
       },
     },
   },
